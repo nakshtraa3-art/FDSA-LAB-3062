@@ -1,0 +1,35 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Data
+y = pd.Series([1, 2, 3, 4, 3, 5, 4])
+x = pd.Series([1, 2, 3, 4, 5, 6, 7])
+
+# Correlation
+correlation = y.corr(x)
+print("Correlation:", correlation)
+
+# Fit best-fit line
+m, b = np.polyfit(x, y, 1)
+
+# R-squared
+y_pred = m * x + b
+r_squared = np.corrcoef(x, y)[0, 1] ** 2
+print("R²:", r_squared)
+
+# Scatter plot
+plt.scatter(x, y, label="Data Points")
+
+# Smooth regression line
+x_line = np.linspace(min(x), max(x), 100)
+y_line = m * x_line + b
+plt.plot(x_line, y_line, color='red', label="Best Fit Line")
+
+# Labels
+plt.xlabel("X values")
+plt.ylabel("Y values")
+plt.title("Scatter Plot with Best Fit Line")
+plt.legend()
+
+plt.show()
